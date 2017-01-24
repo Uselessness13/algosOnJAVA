@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Dns on 24.01.2017.
@@ -59,4 +60,37 @@ public abstract class Sort {
         return array;
     }
 
+    public static int[] mergeSort(int[] array){
+        int len = array.length;
+        if (len < 2) return array;
+        int middle = len / 2;
+        return merge(mergeSort(Arrays.copyOfRange(array, 0, middle)),
+                mergeSort(Arrays.copyOfRange(array, middle, len)));
+    }
+
+    private static int[] merge(int[] arr_1, int[] arr_2) {
+        int len_1 = arr_1.length, len_2 = arr_2.length;
+        int a = 0, b = 0, len = len_1 + len_2;
+        int[] result = new int[len];
+        for (int i = 0; i < len; i++) {
+            if (b < len_2 && a < len_1) {
+                if (arr_1[a] > arr_2[b]) result[i] = arr_2[b++];
+                else result[i] = arr_1[a++];
+            } else if (b < len_2) {
+                result[i] = arr_2[b++];
+            } else {
+                result[i] = arr_1[a++];
+            }
+        }
+        return result;
+    }
+
+
+
+
+    private static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
