@@ -14,26 +14,39 @@ public class Main {
         long erstrt = System.nanoTime();
         Eratosphen eratosphen = new Eratosphen(n);
         long erend = System.nanoTime();
-        System.out.println("ERATOSPHEN time = "+(erend-erstrt));
+        System.out.println("ERATOSPHEN time = " + (erend - erstrt));
         ArrayList<Integer> a = new ArrayList<Integer>();
         String los = "";
-        int BOUND = n*n;
+        int BOUND = n * n;
 
         for (int i = 0; i < n; i++) {
-            a.add(random.nextInt(BOUND));
-            los += a.get(i)+ " ";
+            a.add(random.nextInt(100));
+            los += a.get(i) + " ";
         }
         System.out.println(los);
 
-
-
         Search search = new Search();
 
-        //Sort sort = new Sort();
-        Sort.insertion(a);
+        int[] a1 = new int[n];
+
+        for (int i: a) {
+            a1[a.indexOf(i)] = i;
+        }
+
+        long start = System.nanoTime();
+        Sort.qSort(a);
+//        Sort.heapSort(a1);
+//        Sort.choose(a);
+//        Sort.insertion(a);
+//        Sort.mergeSort(a1);
+//        Sort.shell(a);
+        long end = System.nanoTime();
+        System.out.println("SortTime = " + (end - start));
+        System.out.println(a);
+        /*
         los = "";
         for (int i = 0; i < n; i++) {
-            los += a.get(i)+ " ";
+            los += a.get(i) + " ";
         }
         System.out.println(los);
 
@@ -42,12 +55,13 @@ public class Main {
         long binstart = System.nanoTime();
         System.out.println(Search.binary(a, x));
         long endbin = System.nanoTime();
-        System.out.println("BinTime = "+(endbin-binstart));
+        System.out.println("BinTime = " + (endbin - binstart));
 
         long linstart = System.nanoTime();
         System.out.println(search.linear(a, x));
         long endlin = System.nanoTime();
-        System.out.println("LinTime = "+(endlin-linstart));
+        System.out.println("LinTime = " + (endlin - linstart));
+        */
     }
 
 }
