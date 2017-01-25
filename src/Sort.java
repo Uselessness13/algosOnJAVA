@@ -1,10 +1,12 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Created by Dns on 24.01.2017.
  */
 public abstract class Sort {
+
+    private static Random rnd = new Random();
+
     Sort(){
     }
 
@@ -85,12 +87,82 @@ public abstract class Sort {
         return result;
     }
 
+    private static void heapify(int[] array, int size, int pos) {
+        while (2 * pos + 1 < size) {
+            int t = 2 * pos + 1;
+            if (2 * pos + 2 < size && array[2 * pos + 1] < array[2 * pos + 2]) {
+                t = 2 * pos + 2;
+            }
+            if (array[pos] < array[t]) {
+                swap(array, pos, t);
+                pos = t;
+            } else {
+                break;
+            }
+        }
+    }
 
+
+    private static int[] heapMake(int[] array) {
+        int n = array.length;
+        for (int i = n - 1; i >= 0; i--) {
+            heapify(array, n, i);
+        }
+        return array;
+    }
+
+    public static int[] heapSort(int[] array) {
+        int n = array.length;
+        heapMake(array);
+        while (n > 0) {
+            printer(array);
+            swap(array, 0, n - 1);
+            n--;
+            heapify(array, n, 0);
+
+        }
+        return array;
+    }
 
 
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+
+    private static void printer(int[] array) {
+        for (int i:
+             array) {
+            System.out.print(i+" ");
+        }
+        System.out.println();
+    }
+
+    public static void qSort(List<Integer> array) {
+        System.out.println(array);
+        int n = array.size();
+        int i = 0;
+        int j = n-1;
+        int x = array.get(rnd.nextInt(n));
+        while (i <= j) {
+            while (array.get(i) < x) {
+                i++;
+            }
+            while (array.get(j) > x) {
+                j--;
+            }
+            if (i <= j) {
+                Collections.swap(array,i,j);
+                i++;
+                j--;
+            }
+        }
+        if (j>0){
+            qSort(array.subList(0, j + 1));
+        }
+        if (i<n){
+            qSort(array.subList(i,n));
+        }
     }
 }
