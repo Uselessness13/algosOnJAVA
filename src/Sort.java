@@ -62,7 +62,7 @@ public abstract class Sort {
         return array;
     }
 
-    public static int[] mergeSort(int[] array){
+    private static int[] mergeSort(int[] array){
         int len = array.length;
         if (len < 2) return array;
         int middle = len / 2;
@@ -139,7 +139,7 @@ public abstract class Sort {
         System.out.println();
     }
 
-    public static void qSort(List<Integer> array) {
+    static void qSort(List<Integer> array) {
         System.out.println(array);
         int n = array.size();
         int i = 0;
@@ -163,6 +163,17 @@ public abstract class Sort {
         }
         if (i<n){
             qSort(array.subList(i,n));
+        }
+    }
+
+    public static void bubbleSort(int[] array){
+        int size = array.length;
+        for (int i = 0; i < size; i++) {
+            for (int j = size - 1; j > i; j--) {
+                if (array[j] < array[j - 1]) {
+                    swap(array, array[j], array[j-1]);
+                }
+            }
         }
     }
 }
