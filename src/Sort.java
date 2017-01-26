@@ -171,7 +171,7 @@ public abstract class Sort {
     }
 
     private static boolean correct(int[] array) {
-        for (int i = 1; i < array.length - 2; i++) {
+        for (int i = 1; i < array.length; i++) {
             if (array[i] < array[i - 1])
                 return false;
         }
@@ -180,13 +180,17 @@ public abstract class Sort {
 
     public static void randomSort(int[] array) {
         int size = array.length;
+        int count = 0;
         while (true) {
+            count++;
             int i = rnd.nextInt(size - 1);
             int j = rnd.nextInt(size - 1);
-            if (i != j)
+            if (i != j && array[i] != array[j]) {
                 swap(array, i, j);
+            }
             if (correct(array)){
                 //printer(array);
+                System.out.println(count);
                 return;
             }
         }
