@@ -1,16 +1,10 @@
 import java.util.*;
 
-/**
- * Created by Dns on 24.01.2017.
- */
 public abstract class Sort {
 
     private static Random rnd = new Random();
 
-    Sort() {
-    }
-
-    public static ArrayList<Integer> insertion(ArrayList<Integer> array) {
+    static ArrayList<Integer> insertion(ArrayList<Integer> array) {
         for (int i = 0; i < array.size(); i++) {
             int temp = array.get(i);
             int j = i - 1;
@@ -26,11 +20,9 @@ public abstract class Sort {
     public static ArrayList<Integer> choose(ArrayList<Integer> array) {
         for (int i = 0; i < array.size(); i++) {
             int minValueIndex = i;
-            for (int j = i + 1; j < array.size(); j++) {
-                if (array.get(j) < array.get(minValueIndex)) {
+            for (int j = i + 1; j < array.size(); j++)
+                if (array.get(j) < array.get(minValueIndex))
                     minValueIndex = j;
-                }
-            }
             int temp = array.get(i);
             array.set(i, array.get(minValueIndex));
             array.set(minValueIndex, temp);
@@ -71,13 +63,16 @@ public abstract class Sort {
         int[] result = new int[len];
         for (int i = 0; i < len; i++) {
             if (b < len_2 && a < len_1) {
-                if (arr_1[a] > arr_2[b]) result[i] = arr_2[b++];
-                else result[i] = arr_1[a++];
-            } else if (b < len_2) {
-                result[i] = arr_2[b++];
-            } else {
-                result[i] = arr_1[a++];
+                if (arr_1[a] > arr_2[b])
+                    result[i] = arr_2[b++];
+                else
+                    result[i] = arr_1[a++];
             }
+            else if (b < len_2)
+                result[i] = arr_2[b++];
+            else
+                result[i] = arr_1[a++];
+
         }
         return result;
     }
@@ -97,7 +92,6 @@ public abstract class Sort {
         }
     }
 
-
     private static int[] heapMake(int[] array) {
         int n = array.length;
         for (int i = n - 1; i >= 0; i--) {
@@ -114,7 +108,6 @@ public abstract class Sort {
             swap(array, 0, n - 1);
             n--;
             heapify(array, n, 0);
-
         }
         return array;
     }
@@ -178,7 +171,7 @@ public abstract class Sort {
         return true;
     }
 
-    public static void randomSort(int[] array) {
+    static void randomSort(int[] array) {
         int size = array.length;
         int count = 0;
         while (true) {
@@ -188,10 +181,21 @@ public abstract class Sort {
             if (i != j && array[i] != array[j]) {
                 swap(array, i, j);
             }
-            if (correct(array)){
-                //printer(array);
+            if (correct(array)) {
                 System.out.println(count);
                 return;
+            }
+        }
+    }
+
+    static void gnomeSort(int[] a) {
+        int i = 1;
+        while (i < a.length) {
+            if (i == 0 || a[i - 1] <= a[i])
+                i++;
+            else {
+                swap(a, i, i - 1);
+                i--;
             }
         }
     }
