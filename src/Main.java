@@ -34,15 +34,19 @@ public class Main {
         }
 
         long start = System.nanoTime();
-        Sort.qSort(a);
+//        Sort.qSort(a);
 //        Sort.heapSort(a1);
 //        Sort.choose(a);
 //        Sort.insertion(a);
 //        Sort.mergeSort(a1);
 //        Sort.shell(a);
+//        Sort.bubbleSort(a1);
+        Sort.randomSort(a1);
         long end = System.nanoTime();
         System.out.println("SortTime = " + (end - start));
-        System.out.println(a);
+        for (int i : a1) System.out.print(i + " ");
+        System.out.println();
+//        System.out.println(a);
         /*
         los = "";
         for (int i = 0; i < n; i++) {

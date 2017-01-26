@@ -7,16 +7,14 @@ public abstract class Sort {
 
     private static Random rnd = new Random();
 
-    Sort(){
+    Sort() {
     }
 
-    public static ArrayList<Integer> insertion(ArrayList<Integer> array){
-        for (int i = 0; i < array.size(); i++)
-        {
+    public static ArrayList<Integer> insertion(ArrayList<Integer> array) {
+        for (int i = 0; i < array.size(); i++) {
             int temp = array.get(i);
-            int j =i-1;
-            while(j >= 0 && array.get(j) > temp)
-            {
+            int j = i - 1;
+            while (j >= 0 && array.get(j) > temp) {
                 array.set(j + 1, array.get(j));
                 j--;
             }
@@ -25,7 +23,7 @@ public abstract class Sort {
         return array;
     }
 
-    public static ArrayList<Integer> choose(ArrayList<Integer> array){
+    public static ArrayList<Integer> choose(ArrayList<Integer> array) {
         for (int i = 0; i < array.size(); i++) {
             int minValueIndex = i;
             for (int j = i + 1; j < array.size(); j++) {
@@ -40,17 +38,14 @@ public abstract class Sort {
         return array;
     }
 
-    public static ArrayList<Integer> shell(ArrayList<Integer> array){
+    public static ArrayList<Integer> shell(ArrayList<Integer> array) {
         int size = array.size();
         int step = size / 2;
-        while (step > 0)
-        {
-            for (int i = 0; i < (size - step); i++)
-            {
+        while (step > 0) {
+            for (int i = 0; i < (size - step); i++) {
                 int j = i;
 
-                while (j >= 0 && array.get(j) > array.get(j + step))
-                {
+                while (j >= 0 && array.get(j) > array.get(j + step)) {
                     int temp = array.get(j);
                     array.set(j, array.get(j + step));
                     array.set(j + step, temp);
@@ -62,7 +57,7 @@ public abstract class Sort {
         return array;
     }
 
-    private static int[] mergeSort(int[] array){
+    private static int[] mergeSort(int[] array) {
         int len = array.length;
         if (len < 2) return array;
         int middle = len / 2;
@@ -132,10 +127,7 @@ public abstract class Sort {
     }
 
     private static void printer(int[] array) {
-        for (int i:
-             array) {
-            System.out.print(i+" ");
-        }
+        for (int i : array) System.out.print(i + " ");
         System.out.println();
     }
 
@@ -143,7 +135,7 @@ public abstract class Sort {
         System.out.println(array);
         int n = array.size();
         int i = 0;
-        int j = n-1;
+        int j = n - 1;
         int x = array.get(rnd.nextInt(n));
         while (i <= j) {
             while (array.get(i) < x) {
@@ -153,26 +145,49 @@ public abstract class Sort {
                 j--;
             }
             if (i <= j) {
-                Collections.swap(array,i,j);
+                Collections.swap(array, i, j);
                 i++;
                 j--;
             }
         }
-        if (j>0){
+        if (j > 0) {
             qSort(array.subList(0, j + 1));
         }
-        if (i<n){
-            qSort(array.subList(i,n));
+        if (i < n) {
+            qSort(array.subList(i, n));
         }
     }
 
-    public static void bubbleSort(int[] array){
+    public static void bubbleSort(int[] array) {
         int size = array.length;
         for (int i = 0; i < size; i++) {
             for (int j = size - 1; j > i; j--) {
                 if (array[j] < array[j - 1]) {
-                    swap(array, array[j], array[j-1]);
+                    swap(array, array[j], array[j - 1]);
                 }
+            }
+        }
+        printer(array);
+    }
+
+    private static boolean correct(int[] array) {
+        for (int i = 1; i < array.length - 2; i++) {
+            if (array[i] < array[i - 1])
+                return false;
+        }
+        return true;
+    }
+
+    public static void randomSort(int[] array) {
+        int size = array.length;
+        while (true) {
+            int i = rnd.nextInt(size - 1);
+            int j = rnd.nextInt(size - 1);
+            if (i != j)
+                swap(array, i, j);
+            if (correct(array)){
+                //printer(array);
+                return;
             }
         }
     }
